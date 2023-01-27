@@ -1,0 +1,129 @@
+import React, { useState, useEffect } from "react";
+import img from "../../images/Mr.B.png";
+import { useContext } from "react";
+import AuthContext from "../../context/AuthContext";
+import "./AcceptOrReject.css";
+
+const AdminPage = () => {
+  let { words } = useContext(AuthContext);
+  const [acceptRejectObj, setAcceptRejectObj] = useState([]);
+  let radios = document.getElementsByName("acceptReject");
+
+  const acceptRejectHandler = async (object) => {
+      let response = await fetch(
+        "http://127.0.0.1:8000/api/accept-or-reject",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(object),
+        }
+      );
+      console.log(response);
+      if (response.ok) {
+        console.log("The words has been submitted");
+      } else {
+        console.log("something went wrong");
+      }
+  };
+  const acceptRejectStatusHandler = (object) => {
+    if (object.is_accepted === "accept") {
+      object.is_accepted = true;
+    } else {
+      object.is_accepted = false;
+    }
+    return object
+  };
+  const acceptRejectValue = (e) => {
+    e.preventDefault();
+    for (let i = 0; i < radios.length; i++) {
+      if (radios[i].checked) {
+        console.log(radios[i].value, radios[i].id);
+        setAcceptRejectObj((acceptRejectObj) => [
+          ...acceptRejectObj,
+          { word: radios[i].id, is_accepted: radios[i].value },
+        ]);
+      }
+    }
+  };
+  if (acceptRejectObj.length === words.length) {
+    for (let key in acceptRejectObj) {
+      let objectOfAcceptReject = acceptRejectStatusHandler(
+        acceptRejectObj[key]
+      );
+      console.log(objectOfAcceptReject);
+      acceptRejectHandler(objectOfAcceptReject);
+    }
+  }
+
+  return (
+    <div>
+      <div className="image">
+        <img className="logo" src={img} alt="Mr. B" />
+      </div>
+      <div className="container">
+        <div className="input-word">
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Word of the day</th>
+                <th scope="col">Word Submitted</th>
+                <th scope="col">Accept or Reject</th>
+              </tr>
+            </thead>
+            <tbody>
+              {words.map((curElem) => {
+                console.log(curElem);
+                return (
+                  <tr key={curElem.word}>
+                    <td>{curElem.user}</td>
+                    <td>{curElem.word_of_the_day}</td>
+                    <td>{curElem.word}</td>
+                    <td>
+                      <form>
+                        <div className="radio">
+                          <label>
+                            <input
+                              type="radio"
+                              value="accept"
+                              name="acceptReject"
+                              id={curElem.word}
+                            />
+                            Accept
+                          </label>
+                        </div>
+                        <div className="radio">
+                          <label>
+                            <input
+                              type="radio"
+                              value="reject"
+                              name="acceptReject"
+                              id={curElem.word}
+                            />
+                            Reject
+                          </label>
+                        </div>
+                      </form>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <button
+            className="submit-button-WOTD"
+            type="submit"
+            onClick={acceptRejectValue}
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdminPage;

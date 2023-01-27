@@ -1,0 +1,70 @@
+#nav-title {
+  font-family: cursive;
+  font-style: Bolder;
+  font-size: 30px;
+  /* color: #241757; */
+  color: #241757;
+}
+#nav-title:hover {
+  color: #5380ff;
+}
+.NavLink {
+  font-family: Spartan;
+  /* font-style: Bold; */
+  font-size: 20px;
+  color: #241757;
+}
+
+.mb-0 {
+  background: lavender;
+}
+
+#Home {
+  font-family: Spartan;
+  /* font-style: Bold; */
+  font-size: 21px;
+  color: #241757;
+}
+#admin {
+  font-family: Spartan;
+  /* font-style: Bold; */
+  font-size: 21px;
+  color: #241757;
+}
+#accept-or-reject {
+  font-family: Spartan;
+  /* font-style: Bold; */
+  font-size: 21px;
+  color: #241757;
+}
+#logout {
+  font-family: Spartan;
+  /* font-style: Bold; */
+  font-size: 21px;
+  color: #241757;
+}
+#search {
+  font-family: Spartan;
+  font-size: 21px;
+  color: #241757;
+}
+#Home:hover {
+  font-style: Bold;
+  color: #5380ff;
+}
+#admin:hover {
+  font-style: Bold;
+  color: #5380ff;
+}
+#accept-or-reject:hover {
+  font-style: Bold;
+  color: #5380ff;
+}
+#logout:hover {
+  font-style: Bold;
+  color: #5380ff;
+}
+#search:hover {
+  font-style: Bold;
+  color: #5380ff;
+}
