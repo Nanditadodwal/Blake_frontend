@@ -10,23 +10,20 @@ const AdminPage = () => {
   let radios = document.getElementsByName("acceptReject");
 
   const acceptRejectHandler = async (object) => {
-      let response = await fetch(
-        "http://127.0.0.1:8000/api/accept-or-reject",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(object),
-        }
-      );
-      console.log(response);
-      if (response.ok) {
-        console.log("The words has been submitted");
-      } else {
-        console.log("something went wrong");
-      }
+    let response = await fetch("http://127.0.0.1:8000/api/accept-or-reject", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(object),
+    });
+    console.log(response);
+    if (response.ok) {
+      console.log("The words has been submitted");
+    } else {
+      console.log("something went wrong");
+    }
   };
   const acceptRejectStatusHandler = (object) => {
     if (object.is_accepted === "accept") {
@@ -34,7 +31,7 @@ const AdminPage = () => {
     } else {
       object.is_accepted = false;
     }
-    return object
+    return object;
   };
   const acceptRejectValue = (e) => {
     e.preventDefault();
@@ -47,6 +44,8 @@ const AdminPage = () => {
         ]);
       }
     }
+    alert("All the words are accepted or rejected!");
+    window.location.reload();
   };
   if (acceptRejectObj.length === words.length) {
     for (let key in acceptRejectObj) {

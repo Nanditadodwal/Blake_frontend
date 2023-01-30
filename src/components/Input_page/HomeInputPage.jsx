@@ -64,6 +64,7 @@ const HomeInputPage = () => {
         console.log("something went wrong");
       }
     }
+    alert("all the words have been submitted!")
   };
   console.log(inputArr);
   let reqWord = "";
@@ -75,7 +76,6 @@ const HomeInputPage = () => {
 
   return (
     <div>
-      {console.log("Components Update")}
       <div className="image">
         <img className="logo" src={img} alt="Mr. B" />
       </div>
@@ -106,7 +106,6 @@ const HomeInputPage = () => {
             </button>
             <div className="input-table">
               <div className="input-array">
-                {console.log("Array = ", inputArr)}
                 {inputArr.map((value, index) => {
                   return (
                     <div key={index}>
