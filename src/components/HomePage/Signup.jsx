@@ -102,19 +102,10 @@ const SignupPage = () => {
                   required
                   type="password"
                   name="password"
-                  className="signup-input signup-width margin--right"
+                  className="signup-input"
                   placeholder="create password"
                 />
               </FloatingLabel>
-              {/* Confirm Password */}
-              {/* <FloatingLabel label="Confirm Password" className="signup-label">
-                <Form.Control
-                  required
-                  type="password"
-                  className="signup-input signup-width"
-                  placeholder="confirm password"
-                />
-              </FloatingLabel> */}
             </div>
             <Form.Text
               id="passwordHelpBlock"

@@ -7,6 +7,7 @@ const AuthContext = createContext({
   authTokens: "",
   words: "",
   wordOfDay: "",
+  searchWords: "",
   loginUser: () => {},
   logoutUser: () => {},
   // wordInput: () => {},
@@ -157,8 +158,27 @@ export const AuthProvider = ({ children }) => {
     } else {
       console.log("something went wrong");
     }
-    e.target.wordOfTheDay.value = ''
+    e.target.wordOfTheDay.value = "";
   };
+
+  //SEARCH FUNCTION---------------------------------------------
+  let [searchWords, setSearchWords] = useState([]);
+
+  let searchGet = async (e) => {
+    let response = await fetch(
+      "http://127.0.0.1:8000/api/search-rhyming-words"
+    );
+    // let wordOfDay = await response.json()
+    // console.log(wordOfDay);
+    let result = await response.json();
+    if (response.ok) {
+      setSearchWords(result);
+    }
+  };
+
+  useEffect(() => {
+    searchGet();
+  }, []);
 
   //LOGOUT FUNCTION---------------------------------------------
 
@@ -196,6 +216,7 @@ export const AuthProvider = ({ children }) => {
     authTokens: authTokens,
     words: words,
     wordOfDay: wordOfDay,
+    searchWords: searchWords,
     loginUser: loginUser,
     logoutUser: logoutUser,
     // wordInput: wordInput,
@@ -216,8 +237,6 @@ export const AuthProvider = ({ children }) => {
   }, [authTokens, loading]);
 
   return (
-    <AuthContext.Provider value={contextData}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
   );
 };
