@@ -67,20 +67,20 @@ const NavBar = () => {
           ))}
         </>
       ) : (
-        <div className="mb-0">
+        <Navbar className="mb-0">
           <Container fluid>
-          <Navbar.Brand href="/">
-                  <img
+          <Navbar.Brand>
+                  {/* <img
                     alt=""
                     src={Logo}
                     width="50"
                     height="45"
                     className="d-inline-block align-top nav-img"
-                  />{" "}
-                  <span id="nav-title">Mr.B's Rhyming Dictionary!</span>
+                  />{" "} */}
+                  <span id="nav-title">Mr.B's Rhyming Dictionary</span>
                 </Navbar.Brand>
           </Container>
-        </div>
+        </Navbar>
       )}
     </header>
   );

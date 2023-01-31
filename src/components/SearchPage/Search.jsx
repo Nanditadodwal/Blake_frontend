@@ -62,6 +62,7 @@ const Search = () => {
         </Form>
         {flag ? (
           <div>
+            <span>{searchWordOfTheDay}</span>
             {searchArr.map((curElem) => {
               console.log(curElem);
 
@@ -71,9 +72,15 @@ const Search = () => {
                   {console.log(searchWordOfTheDay)}
                   {curElem.Word_of_the_day.toLowerCase() ===
                   searchWordOfTheDay ? (
-                    <span>{curElem.word}</span>
+                    <div>
+                      {curElem.word.toLowerCase() !== searchWord ? (
+                        <span>{curElem.word}</span>
+                      ) : (
+                        ""
+                      )}
+                    </div>
                   ) : (
-                    "No rhyming words found!"
+                    ""
                   )}
                 </div>
               );
