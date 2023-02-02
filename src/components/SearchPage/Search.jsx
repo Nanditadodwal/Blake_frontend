@@ -13,21 +13,18 @@ const Search = () => {
   let searchGet = async (e) => {
     e.preventDefault();
     setflag(true);
-    console.log(searchWord);
     let response = await fetch(
       "http://127.0.0.1:8000/api/search-rhyming-words"
     );
     let result = await response.json();
     if (response.ok) {
       setSearchArr(result);
-      console.log(searchWord);
       for (let i of searchArr) {
         let reqWord = searchWord.toLowerCase();
         let wordOfTheDayInList = i.Word_of_the_day.toLowerCase();
         let wordInList = i.word.toLowerCase();
         if (reqWord === wordOfTheDayInList || reqWord === wordInList) {
           setsearchWordOfTheDay(wordOfTheDayInList);
-          console.log(searchWordOfTheDay);
           break;
         }
       }
@@ -64,8 +61,6 @@ const Search = () => {
           <div>
             <span>{searchWordOfTheDay}</span>
             {searchArr.map((curElem) => {
-              console.log(curElem);
-
               return (
                 <div key={curElem.id}>
                   {console.log(curElem.Word_of_the_day.toLowerCase())}

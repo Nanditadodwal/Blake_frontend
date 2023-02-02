@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext({
   user: "",
+  userInfo: "",
   authTokens: "",
   words: "",
   wordOfDay: "",
@@ -64,6 +65,18 @@ export const AuthProvider = ({ children }) => {
       alert("your credentials are wrong");
     }
   };
+  let [userInfo, setUserInfo] = useState([]);
+
+  let loginUserGet = async (e) => {
+    console.log("Login Get------------------------");
+    let response = await fetch("http://127.0.0.1:8000/api/auth/login");
+    setUserInfo(await response.json());
+    console.log(userInfo);
+  };
+
+  useEffect(() => {
+    loginUserGet();
+  }, []);
 
   // //WORD INPUT FUNCTION-----------------------------------------
 
@@ -213,6 +226,7 @@ export const AuthProvider = ({ children }) => {
 
   let contextData = {
     user: user,
+    userInfo: userInfo,
     authTokens: authTokens,
     words: words,
     wordOfDay: wordOfDay,

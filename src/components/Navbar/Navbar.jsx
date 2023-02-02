@@ -8,12 +8,13 @@ import Logo from "../../images/Mr.B.png";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
 const NavBar = () => {
-  let { user, logoutUser } = useContext(AuthContext);
+  let { user, userInfo, logoutUser } = useContext(AuthContext);
 
   return (
     <header>
       {user ? (
         <>
+          {console.log(userInfo)}
           {["xl"].map((expand) => (
             <Navbar key={expand} expand={expand} className="mb-0">
               <Container fluid>
@@ -69,16 +70,16 @@ const NavBar = () => {
       ) : (
         <Navbar className="mb-0">
           <Container fluid>
-          <Navbar.Brand>
-                  {/* <img
+            <Navbar.Brand>
+              {/* <img
                     alt=""
                     src={Logo}
                     width="50"
                     height="45"
                     className="d-inline-block align-top nav-img"
                   />{" "} */}
-                  <span id="nav-title">Mr.B's Rhyming Dictionary</span>
-                </Navbar.Brand>
+              <span id="nav-title">Mr.B's Rhyming Dictionary</span>
+            </Navbar.Brand>
           </Container>
         </Navbar>
       )}
