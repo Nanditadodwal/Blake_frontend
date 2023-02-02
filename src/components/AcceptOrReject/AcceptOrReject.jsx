@@ -79,7 +79,7 @@ const AdminPage = () => {
                 return (
                   <tr key={curElem.word}>
                     <td>{curElem.user}</td>
-                    <td>{curElem.word_of_the_day}</td>
+                    <td>{curElem.Word_of_the_day}</td>
                     <td>{curElem.word}</td>
                     <td>
                       <form>
