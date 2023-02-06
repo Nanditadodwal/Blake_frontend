@@ -4,9 +4,12 @@ import img from "../../images/Mr.B.png";
 import { FloatingLabel, Form } from "react-bootstrap";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminPage = () => {
   let { wordOfTheDayPost } = useContext(AuthContext);
+  const notify = () => toast("Word of the day has been set!");
   // const [WordOfTheDay, setWordOfTheDay] = useState("");
   // async function WordOfTheDayFunc(e) {
   //   e.preventDefault();
@@ -53,13 +56,14 @@ const AdminPage = () => {
                   // onChange={(e) => setWordOfTheDay(e.target.value)}
                 />
               </FloatingLabel>
-              <button className="submit-button" type="submit" >
+              <button className="submit-button" type="submit">
                 Submit
               </button>
             </Form>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -7,6 +7,7 @@ import "./AcceptOrReject.css";
 const AdminPage = () => {
   let { words } = useContext(AuthContext);
   const [acceptRejectObj, setAcceptRejectObj] = useState([]);
+  // const [flag, setflag] = useState(false);
   let radios = document.getElementsByName("acceptReject");
 
   const acceptRejectHandler = async (object) => {
@@ -20,6 +21,7 @@ const AdminPage = () => {
     });
     console.log(response);
     if (response.ok) {
+      console.log(acceptRejectObj);
       console.log("The words has been submitted");
     } else {
       console.log("something went wrong");
@@ -44,8 +46,6 @@ const AdminPage = () => {
         ]);
       }
     }
-    alert("All the words are accepted or rejected!");
-    window.location.reload();
   };
   if (acceptRejectObj.length === words.length) {
     for (let key in acceptRejectObj) {
@@ -56,6 +56,8 @@ const AdminPage = () => {
       acceptRejectHandler(objectOfAcceptReject);
     }
   }
+
+  
 
   return (
     <div>
