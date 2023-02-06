@@ -45,7 +45,7 @@ const SignupPage = () => {
             <div className="signup-details">
               {/* First Name */}
               <FloatingLabel
-                label="First Name"
+                label="Username"
                 className="signup-label"
                 autoCapitalize="sentences"
                 onChange={(e) => setUsername(e.target.value)}
@@ -55,18 +55,18 @@ const SignupPage = () => {
                   type="text"
                   placeholder="first name"
                   name="username"
-                  className="signup-input margin--right signup-width"
+                  className="signup-input"
                 />
               </FloatingLabel>
               {/* Last Name */}
-              <FloatingLabel label="Last Name" className="signup-label">
+              {/* <FloatingLabel label="Last Name" className="signup-label">
                 <Form.Control
                   required
                   type="text"
                   placeholder="last name"
                   className="signup-input signup-width"
                 />
-              </FloatingLabel>
+              </FloatingLabel> */}
             </div>
             {/* Email ID */}
             <FloatingLabel

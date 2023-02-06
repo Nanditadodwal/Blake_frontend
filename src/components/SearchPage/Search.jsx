@@ -16,6 +16,8 @@ const Search = () => {
     let response = await fetch(
       "http://127.0.0.1:8000/api/search-rhyming-words"
     );
+
+    
     let result = await response.json();
     if (response.ok) {
       setSearchArr(result);
@@ -49,7 +51,7 @@ const Search = () => {
               placeholder="Rhyming Word"
               name="searchWord"
               className="rhymingWord"
-              //   value="searchWord"
+              value={searchWord}
               onChange={(e) => setSearchWord(e.target.value)}
             />
           </FloatingLabel>
@@ -57,7 +59,7 @@ const Search = () => {
             Search
           </button>
         </Form>
-        {flag ? (
+        {flag || searchWord !== "" ? (
           <div>
             <span>{searchWordOfTheDay}</span>
             {searchArr.map((curElem) => {

@@ -5,6 +5,8 @@ import { FloatingLabel, Form } from "react-bootstrap";
 import "./HomeInputPage.css";
 import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const HomeInputPage = () => {
   let { wordOfDay, user } = useContext(AuthContext);
@@ -17,6 +19,8 @@ const HomeInputPage = () => {
 
   const [inputArr, setInputArr] = useState([]);
   const [inputWord, setInputWord] = useState("");
+
+  const notify = () => toast("All the words have been submitted!");
 
   function submitHandler(e) {
     e.preventDefault();
@@ -41,7 +45,6 @@ const HomeInputPage = () => {
   }
 
   let wordInput = async (e) => {
-    // e.preventDefault()
     for (let word in inputArr) {
       if (inputArr[word].inputWord === "") {
         continue;
@@ -64,7 +67,7 @@ const HomeInputPage = () => {
         console.log("something went wrong");
       }
     }
-    alert("all the words have been submitted!")
+    notify();
   };
   console.log(inputArr);
   let reqWord = "";
@@ -139,6 +142,7 @@ const HomeInputPage = () => {
           </Form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

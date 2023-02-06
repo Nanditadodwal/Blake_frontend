@@ -1,10 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AuthContext = createContext({
   user: "",
-  userInfo: "",
   authTokens: "",
   words: "",
   wordOfDay: "",
@@ -65,18 +66,6 @@ export const AuthProvider = ({ children }) => {
       alert("your credentials are wrong");
     }
   };
-  let [userInfo, setUserInfo] = useState([]);
-
-  let loginUserGet = async (e) => {
-    console.log("Login Get------------------------");
-    let response = await fetch("http://127.0.0.1:8000/api/auth/login");
-    setUserInfo(await response.json());
-    console.log(userInfo);
-  };
-
-  useEffect(() => {
-    loginUserGet();
-  }, []);
 
   // //WORD INPUT FUNCTION-----------------------------------------
 
@@ -108,7 +97,6 @@ export const AuthProvider = ({ children }) => {
   const [words, setWords] = useState([]);
 
   let acceptOrRejectGet = async (e) => {
-    console.log("Accept or Reject Get------------------------");
     let response = await fetch("http://127.0.0.1:8000/api/accept-or-reject");
     setWords(await response.json());
     console.log();
@@ -141,9 +129,10 @@ export const AuthProvider = ({ children }) => {
   //WORD OF THE DAY FUNCTION------------------------------------
 
   const [wordOfDay, setWordOfDay] = useState([]);
+  const notify = () => toast("Word of the day has been set!");
+  const notify2 = () => toast("Something went wrong!");
 
   let wordOfTheDayGet = async (e) => {
-    console.log("Word of the day Get------------------------");
     let response = await fetch("http://127.0.0.1:8000/api/word-of-the-day");
     // let wordOfDay = await response.json()
     // console.log(wordOfDay);
@@ -156,7 +145,6 @@ export const AuthProvider = ({ children }) => {
 
   let wordOfTheDayPost = async (e) => {
     e.preventDefault();
-    console.log("word of the day input-----------------");
     let item = { Word_of_the_day: e.target.wordOfTheDay.value };
     let response = await fetch("http://127.0.0.1:8000/api/word-of-the-day", {
       method: "POST",
@@ -167,9 +155,9 @@ export const AuthProvider = ({ children }) => {
       body: JSON.stringify(item),
     });
     if (response.ok) {
-      console.log("Word of the day has been submitted");
+      notify();
     } else {
-      console.log("something went wrong");
+      notify2();
     }
     e.target.wordOfTheDay.value = "";
   };
@@ -205,7 +193,6 @@ export const AuthProvider = ({ children }) => {
   //TOKEN UPDATION-----------------------------------------------
 
   let updateToken = async () => {
-    console.log("update token called---------------");
     let response = await fetch("http://127.0.0.1:8000/api/auth/login-refresh", {
       method: "POST",
       headers: {
@@ -226,7 +213,6 @@ export const AuthProvider = ({ children }) => {
 
   let contextData = {
     user: user,
-    userInfo: userInfo,
     authTokens: authTokens,
     words: words,
     wordOfDay: wordOfDay,
